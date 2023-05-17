@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>날씨</title>
+<!-- 일반 CSS -->
+<link rel="stylesheet" href="/css/common.css" />
+<!-- favicon -->
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+<!-- 구글 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery.min.js"></script>
+
+</head>
+<body>
+	<!-- 메뉴 -->
+	<div class="navbar">
+		<a href="/" class="pagename">날씨</a>
+		<a href="/Map" class="nav-item">지도</a>
+		<a href="/News" class="nav-item">뉴스</a>
+	</div>
+	
+   <div class="page-wrap">
+	   <!-- 날씨 정보 부분 -->
+	   <div class="widget-div">
+         <div id="weather-info">
+	   	  <!-- 사용자 위치(geolocation.js에서 불러옴) -->
+	         <div id="userloc">내 위치</div>
+	         <!-- 위치 추적 버튼(위치 새로고침용 - geolocation.js) -->
+	         <input type="button" class="btn-loc" onclick="onGeoOk()" alt="내 위치 찾기 버튼">
+            <div class="binder weather">
+               <div class="weather-info" id="weather-info">
+                  <span><img id="weather-icon" src="/img/loading.svg"></span>
+               </div>
+               <div class="temperature"><span id="temperature">36.5</span><span class="weather-unit">&deg;</span></div>
+               <div class="weather-desc" id="weather-desc">
+            	   현재 날씨
+               </div>
+               <div class="max-temp">최고기온&nbsp;<span id="max-temp">36.5</span>&deg;</div>
+               <div class="min-temp">최저기온&nbsp;<span id="min-temp">36.5</span>&deg;</div>
+             </div>
+            <div class="binder weather">
+               <div class="humidity">습도&nbsp;<span class="weather-value" id="humidity">36.5</span>%</div>
+               <div class="spacer">&nbsp;</div>
+               <div class="feelslike">체감온도&nbsp;<span id="feelslike">36.5</span>&deg;</div>
+            </div>
+            <div class="binder weather">
+               <div class="wind-dir">풍향&nbsp;<span id="wind-dir">36.5</span></div>
+               <div class="spacer">&nbsp;</div>
+               <div class="wind-speed">풍속&nbsp;<span id="windspeed">36.5</span>m/s</div>
+            </div>
+            <div class="binder weather">
+               <div class="sunrise">일출&nbsp;<span id="sunrise">03:33</span></div>
+               <div class="spacer">&nbsp;</div>
+               <div class="sunset">일몰&nbsp;<span id="sunset">15:33</span></div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <script src="/js/wtranslate.js"></script>
+	<script src="/js/geolocation.js"></script>
+	<script src="/js/weather.js"></script>
+</body>
+</html>

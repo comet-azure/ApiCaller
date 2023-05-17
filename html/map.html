@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>지도</title>
+	<!-- 일반 CSS -->
+	<link rel="stylesheet" href="/css/common.css" />
+	
+	<!-- 구글 폰트 -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+	
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery.min.js"></script>
+	
+	
+</head>
+<body>
+	<div class="navbar">
+		<a href="/" class="pagename">날씨</a>
+		<a href="/Map" class="nav-item" id="bold-black">지도</a>
+		<a href="/News" class="nav-item">뉴스</a>
+	</div>
+	
+	<div id="map" style="width:100%;height:100vh;"></div> 
+	    
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7a3fd22421598fa802aaa9c5b5e5658f"></script>
+<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = { 
+	    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	    level: 5 // 지도의 확대 레벨 
+	}; 
+	
+	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성
+	
+	//HTML5의 geolocation으로 사용할 수 있는지 확인
+	if (navigator.geolocation) {
+	// GeoLocation을 이용해서 접속 위치를 얻어옴
+		navigator.geolocation.getCurrentPosition(function(position) {
+	   		var lat = position.coords.latitude, // 위도
+	        	lon = position.coords.longitude; // 경도
+	    	var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
+	        message = '<div style="padding:5px;">현 위치</div>'; // 인포윈도우에 표시될 내용
+		    // 마커와 인포윈도우를 표시
+		    displayMarker(locPosition, message);     
+	  });
+	
+	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정
+		var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+		    message = 'geolocation을 사용할 수 없습니다';
+		displayMarker(locPosition, message);
+	}
+	
+	//지도에 마커와 인포윈도우를 표시하는 함수
+	function displayMarker(locPosition, message) {
+		// 마커를 생성
+		var marker = new kakao.maps.Marker({  
+		    map: map, 
+		    position: locPosition
+		}); 
+		var iwContent = message, // 인포윈도우에 표시할 내용
+		    iwRemoveable = true;
+		// 인포윈도우를 생성
+		var infowindow = new kakao.maps.InfoWindow({
+		    content : iwContent,
+		    removable : iwRemoveable
+		});
+		// 인포윈도우를 마커위에 표시 
+		infowindow.open(map, marker);
+		// 지도 중심좌표를 접속위치로 변경
+		map.setCenter(locPosition);      
+	}
+	
+</script>
+</body>
+</html>
