@@ -10,6 +10,107 @@ a       { text-decoration: none; }
 
 #bold-black { font-weight: bold; color: black;}
 
+
+/* ----------메뉴(navbar)------------- */
+.navbar { 
+	font-size: 17px;
+	border-bottom: 1px groove lightgray;
+	padding: 9px;
+	margin-bottom: 25px;
+	 }
+/* 메뉴 내 페이지명 */
+.pagename { color: black; font-weight: 700; font-size: 20px; padding-right: 3px;}
+/* 페이지명 옆 메뉴 아이템 */
+.nav-item { color: gray; padding: 5px;}
+
+/* 페이지 전체 wrapper */
+.page-wrap { padding: 2rem; }
+
+/* -----------날씨 위젯 부분----------- */
+/* 현 위치 버튼 */
+.btn-loc {
+	width: 20px;
+	background: url("../img/geo-alt-fill.svg") no-repeat;
+    background-size: auto 20px;
+    border: none;
+}
+
+/* 현 위치 출력 div id */
+#userloc {
+	display: inline-block;
+}
+
+/* 현재 날씨 정보 부분 */
+.weather-info {
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+    background-color: #fff;
+    font-family: inherit;
+    box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
+	-webkit-box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
+	-moz-box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
+    min-width: 300px;
+	width: 97%;
+	height: 100%;
+	font-size: 1.2em;
+}
+
+.weather-card {
+	display: flex;
+	flex-direction: column;
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+    background-color: #fff;
+    font-family: inherit;
+    box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
+	-webkit-box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
+	-moz-box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
+    min-width: 360px;
+    font-size: 1rem;
+	width: 30%;
+	align-items: center;
+}
+
+.sunrise-sunset {
+	display: flex;
+	flex-direction: column;
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+    background-color: #fff;
+    font-family: inherit;
+    box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
+	-webkit-box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
+	-moz-box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
+    min-width: 360px;
+    font-size: 1rem;
+	width: 30%;
+	align-items: center;
+	justify-content: center;
+}
+
+/* 날씨 아이콘 */
+#weather-icon {
+	width: 200px;
+	height: 200px;
+}
+
+/* 현재 온도 */
+.temperature {
+	font-size: 45px;
+	
+}
+
+/* 현재 날씨 */
+.weather-desc {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
 /* -----------메인 화면--------------- */
 .page-wrap {
 	display: flex;
@@ -205,104 +306,4 @@ a       { text-decoration: none; }
 }
 .flex-1 {
 	flex: 1;
-}
-
-/* ----------메뉴(navbar)------------- */
-.navbar { 
-	font-size: 17px;
-	border-bottom: 1px groove lightgray;
-	padding: 9px;
-	margin-bottom: 25px;
-	 }
-/* 메뉴 내 페이지명 */
-.pagename { color: black; font-weight: 700; font-size: 20px; padding-right: 3px;}
-/* 페이지명 옆 메뉴 아이템 */
-.nav-item { color: gray; padding: 5px;}
-
-/* 페이지 전체 wrapper */
-.page-wrap { padding: 2rem; }
-
-/* -----------날씨 위젯 부분----------- */
-/* 현 위치 버튼 */
-.btn-loc {
-	width: 20px;
-	background: url("../img/geo-alt-fill.svg") no-repeat;
-    background-size: auto 20px;
-    border: none;
-}
-
-/* 현 위치 출력 div id */
-#userloc {
-	display: inline-block;
-}
-
-/* 현재 날씨 정보 부분 */
-.weather-info {
-    padding: 1rem;
-    border-radius: 10px;
-    border: none;
-    background-color: #fff;
-    font-family: inherit;
-    box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
-	-webkit-box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
-	-moz-box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
-    min-width: 300px;
-	width: 97%;
-	height: 100%;
-	font-size: 1.2em;
-}
-
-.weather-card {
-	display: flex;
-	flex-direction: column;
-    padding: 1rem;
-    border-radius: 10px;
-    border: none;
-    background-color: #fff;
-    font-family: inherit;
-    box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
-	-webkit-box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
-	-moz-box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
-    min-width: 360px;
-    font-size: 1rem;
-	width: 30%;
-	align-items: center;
-}
-
-.sunrise-sunset {
-	display: flex;
-	flex-direction: column;
-    padding: 1rem;
-    border-radius: 10px;
-    border: none;
-    background-color: #fff;
-    font-family: inherit;
-    box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
-	-webkit-box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
-	-moz-box-shadow: 0px 0px 5px 1px rgba(66,60,60,0.54);
-    min-width: 360px;
-    font-size: 1rem;
-	width: 30%;
-	align-items: center;
-	justify-content: center;
-}
-
-/* 날씨 아이콘 */
-#weather-icon {
-	width: 200px;
-	height: 200px;
-}
-
-/* 현재 온도 */
-.temperature {
-	font-size: 45px;
-	
-}
-
-/* 현재 날씨 */
-.weather-desc {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
 }
