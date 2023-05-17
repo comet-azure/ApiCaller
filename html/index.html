@@ -14,53 +14,682 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery.min.js"></script>
+		<style>
+			.page-wrap {
+				display: flex;
+				margin: 0;
+				padding: 0 20% 0 20%;
+				flex-direction: column;
+				align-content: center;
+				justify-content: center;
+				height: 100%;
+				width: 100%;
+				min-width: 1000px;
+			}
+			.logo-box {
+				padding: 50px 0 25px 0;
+			}
+			.logo {
+				font-size: 25pt;
+				font-weight: normal;
+				font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+			}
+			.top-section {
+				display: grid;
+				grid-template-columns: 1fr 0.35fr;
+				grid-template-rows: 1fr 0.6fr 1fr 1fr;
+				grid-column-gap: 25px;
+				grid-row-gap: 25px;
+			}
+			.weather-now {
+				/* Current weather widget */
+				grid-area: 1/1 / 2/2;
+			}
+			.weather-week {
+				/* Weekly weather widget outer */
+				grid-area: 2/1 / 2/1;
+			}
+			.weather-national {
+				/* National weather widget */
+				grid-area: 2/2 / 1/2;
+				width: 100%;
+			}
+			.grid-1 {
+				/* Weekly weather widget inner */
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+				grid-template-rows: 1fr;
+				grid-column-gap: 0px;
+				grid-row-gap: 0px;
+				justify-content: center;
+			}
+			.weekly-weather.topbar {
+				padding-bottom: 15px;
+			}
+			.ww-elem {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+			}
+			.ww-icon-small {
+				width: 115px;
+				height: auto;
+			}
+			.national-weather {
+				/* Weekly weather widget inner */
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+				grid-column-gap: 0px;
+				grid-row-gap: 0px;
+				height: 100%;
+				justify-content: space-between;
+			}
 
-</head>
-<body>
-	<!-- 메뉴 -->
-	<div class="navbar">
-		<a href="/" class="pagename">날씨</a>
-		<a href="/Map" class="nav-item">지도</a>
-		<a href="/News" class="nav-item">뉴스</a>
-	</div>
-	
-   <div class="page-wrap">
-	   <!-- 날씨 정보 부분 -->
-	   <div class="widget-div">
-         <div id="weather-info">
-	   	  <!-- 사용자 위치(geolocation.js에서 불러옴) -->
-	         <div id="userloc">내 위치</div>
-	         <!-- 위치 추적 버튼(위치 새로고침용 - geolocation.js) -->
-	         <input type="button" class="btn-loc" onclick="onGeoOk()" alt="내 위치 찾기 버튼">
-            <div class="binder weather">
-               <div class="weather-info" id="weather-info">
-                  <span><img id="weather-icon" src="/img/loading.svg"></span>
-               </div>
-               <div class="temperature"><span id="temperature">36.5</span><span class="weather-unit">&deg;</span></div>
-               <div class="weather-desc" id="weather-desc">
-            	   현재 날씨
-               </div>
-               <div class="max-temp">최고기온&nbsp;<span id="max-temp">36.5</span>&deg;</div>
-               <div class="min-temp">최저기온&nbsp;<span id="min-temp">36.5</span>&deg;</div>
-             </div>
-            <div class="binder weather">
-               <div class="humidity">습도&nbsp;<span class="weather-value" id="humidity">36.5</span>%</div>
-               <div class="spacer">&nbsp;</div>
-               <div class="feelslike">체감온도&nbsp;<span id="feelslike">36.5</span>&deg;</div>
-            </div>
-            <div class="binder weather">
-               <div class="wind-dir">풍향&nbsp;<span id="wind-dir">36.5</span></div>
-               <div class="spacer">&nbsp;</div>
-               <div class="wind-speed">풍속&nbsp;<span id="windspeed">36.5</span>m/s</div>
-            </div>
-            <div class="binder weather">
-               <div class="sunrise">일출&nbsp;<span id="sunrise">03:33</span></div>
-               <div class="spacer">&nbsp;</div>
-               <div class="sunset">일몰&nbsp;<span id="sunset">15:33</span></div>
-            </div>
-         </div>
-      </div>
-   </div>
+			.national-list-elem {
+				display: flex;
+				flex-direction: row;
+				min-height: 45px;
+				font-size: 1.25em;
+				align-items: center;
+				justify-content: flex-end;
+			}
+			
+			.hr3-grid {
+				/* Weekly weather widget inner */
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+				grid-template-rows: 0.25fr 1fr 0.45fr 0.45fr 0.45fr ;
+				grid-column-gap: 0px;
+				grid-row-gap: 0px;
+				height: 90%;
+				justify-content: center;
+				align-content: center;
+				text-align: center;
+			}
+			
+			.nl-icon-small {
+				min-width: 45px;
+			}
+			.nl-temp {
+				font-size: 1em;
+			}
+			.sun-icons {
+				width: 120px;
+			}
+
+			/* Text size definitions */
+			.bigtemp {
+				font-size: 3.25em;
+			}
+			.desc-text {
+				display: flex;
+				width: 100%;
+				flex-direction: row;
+				align-content: flex-start;
+				font-size: 1.5em;
+			}
+			#weather-desc {
+				font-size: 1.25em;
+				margin-top: -30px;
+			}
+			.emp-125 {
+				font-size: 1.25em;
+			}
+			
+			.news-line {
+				line-height: 2.25em;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+			.hr3-icon-tiny {
+				width: 100px;
+				height: 100px;
+			}
+			.forecast-3hr-title {
+				padding-bottom: 10px;
+			}
+
+			/* Text manipulation macros */
+			.bold {
+				font-weight: bold;
+			}
+			.black-text {
+				color: #1B1B1B;
+			}
+			.gray-text {
+				color: #888888;
+			}
+			.red-text {
+				color: #D91519;
+				font-weight: bold;
+			}
+			.placeholder {
+				color: white;
+				font-size: 4em;
+				text-align: center;
+				background-color: #9A9A9A;
+			}
+			.placeholder:after {
+				content: "Placeholder";
+			}
+
+			/* Flex mode macros */
+			.flex-row {
+				display: flex;
+				flex-direction: row;
+			}
+			.flex-col {
+				display: flex;
+				flex-direction: column;
+			}
+			.flex-center {
+				justify-content: center;
+				align-items: center;
+			}
+			.space-between {
+				width: 85%;
+				justify-content: space-between;
+			}
+			.padded15 {
+				padding: 0 15 0 15;
+			}
+			.paddedv15 {
+				padding: 15 0 0 0;
+			}
+			.padme1 {
+				padding-right: 24px;
+			}
+			.wh-100 {
+				width: 100%;
+				height: 75%;
+			}
+			.flex-1 {
+				flex: 1;
+			}
+		</style>
+		<!-- jQuery -->
+		<script src="%EB%82%A0%EC%94%A8_files/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="page-wrap">
+			<div class="logo-box">
+				<div class="logo">
+					<span class="red-text">Web</span><span class="black-text">Portal</span>&trade; 웹포탈
+				</div>
+			</div>
+			<!-- 메뉴 -->
+			<div class="navbar">
+				<a href="/" class="pagename">날씨</a>
+				<a href="/Map" class="nav-item">지도</a>
+				<a href="/News" class="nav-item">뉴스</a>
+			</div>
+			<!-- 날씨 정보 부분 -->
+			<div class="top-section">
+				<div class="widget-div weather-now flex-1">
+					<div class="weather-info">
+						<!-- 위치 추적 버튼(위치 새로고침용 - geolocation.js) -->
+						<input type="button" class="btn-loc" onclick="onGeoOk()" alt="내 위치 찾기 버튼" />
+						<!-- 사용자 위치(geolocation.js에서 불러옴) -->
+						<div id="userloc">내 위치</div><span>의 날씨</span>
+						<div class="wh-100 flex-row flex-center">
+						<div class="binder weather flex-row flex-center">
+							<div class="binder weather flex-col">
+								<div class="weather-icon" id="weather-info">
+									<span>
+										<img id="weather-icon" src="img/sunny.svg" alt="Weather icon" />
+									</span>
+								</div>
+								<div class="weather-desc" id="weather-desc">맑음</div>
+							</div>
+							<div class="flex-col">
+								<div class="flex-row flex-center">
+									<div class="binder line">
+										<div class="bigtemp">
+											<span id="temperature">20.44</span><span class="weather-unit">°</span>
+										</div>
+									</div>
+									&nbsp;&nbsp;
+									<div class="binder line">
+										<div class="max-temp">최고&nbsp; <span id="max-temp">20.44</span>°</div>
+										<div class="min-temp">최저&nbsp; <span id="min-temp">20.44</span>°</div>
+									</div>
+								</div>
+								<div class="binder line emp-125">
+									<div class="wind-dir">
+										<span class="bold">풍향&nbsp;</span>
+										<span id="wind-dir">남남서</span>&nbsp; <span id="windspeed">1.54</span>m/s
+									</div>
+								</div>
+								<div class="binder weather emp-125">
+							<div class="humidity"><span class="bold">습도&nbsp; </span><span class="weather-value" id="humidity">32</span>%</div>
+						</div>
+						<div class="binder weather emp-125">
+							<div class="feelslike"><span class="bold">체감온도&nbsp; </span><span id="feelslike">19.38</span>°C</div></div>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="weather-week">
+					<div class="weekly-weather topbar emp-125">
+						<span class="bold main black-text">일주일 예보</span>
+						<span class="separator">|</span>
+						<span class="main gray-text" id="weekly-location">부산광역시</span>
+					</div>
+					<div class="weekly-weather grid-1" id="weekly-weather">
+						<!-- Hint: use "nth child" selector! -->
+						<div class="ww-elem">
+							<div class="ww-top-text">
+								<span class="bold sub black-text weekday">월</span>
+								<span class="bold sub gray-text date"> / 5.15</span>
+							</div>
+							<div class="ww-icon">
+								<img class="ww-icon-small" src="img/light-rain.svg" alt="weather icon small" />
+							</div>
+							<div class="ww-bottom-text">
+								<span class="bold sub black-text">비 약간</span>
+								<br />
+								<span class="bold sub gray-text"> 24&deg;C</span>
+								<span class="bold sub black-text"> / 10&deg;C</span>
+							</div>
+						</div>
+						<div class="ww-elem">
+							<div class="ww-top-text">
+								<span class="bold sub black-text weekday">화</span>
+								<span class="bold sub gray-text date"> / 5.15</span>
+							</div>
+							<div class="ww-icon">
+								<img class="ww-icon-small" src="img/light-rain.svg" alt="weather icon small" />
+							</div>
+							<div class="ww-bottom-text">
+								<span class="bold sub black-text">비 약간</span>
+								<br />
+								<span class="bold sub gray-text"> 24&deg;C</span>
+								<span class="bold sub black-text"> / 10&deg;C</span>
+							</div>
+						</div>
+						<div class="ww-elem">
+							<div class="ww-top-text">
+								<span class="bold sub black-text weekday">수</span>
+								<span class="bold sub gray-text date"> / 5.15</span>
+							</div>
+							<div class="ww-icon">
+								<img class="ww-icon-small" src="img/light-rain.svg" alt="weather icon small" />
+							</div>
+							<div class="ww-bottom-text">
+								<span class="bold sub black-text">비 약간</span>
+								<br />
+								<span class="bold sub gray-text"> 24&deg;C</span>
+								<span class="bold sub black-text"> / 10&deg;C</span>
+							</div>
+						</div>
+						<div class="ww-elem">
+							<div class="ww-top-text">
+								<span class="bold sub black-text weekday">목</span>
+								<span class="bold sub gray-text date"> / 5.15</span>
+							</div>
+							<div class="ww-icon">
+								<img class="ww-icon-small" src="img/light-rain.svg" alt="weather icon small" />
+							</div>
+							<div class="ww-bottom-text">
+								<span class="bold sub black-text">비 약간</span>
+								<br />
+								<span class="bold sub gray-text"> 24&deg;C</span>
+								<span class="bold sub black-text"> / 10&deg;C</span>
+							</div>
+						</div>
+						<div class="ww-elem">
+							<div class="ww-top-text">
+								<span class="bold sub black-text weekday">금</span>
+								<span class="bold sub gray-text date"> / 5.15</span>
+							</div>
+							<div class="ww-icon">
+								<img class="ww-icon-small" src="img/light-rain.svg" alt="weather icon small" />
+							</div>
+							<div class="ww-bottom-text">
+								<span class="bold sub black-text">비 약간</span>
+								<br />
+								<span class="bold sub gray-text"> 24&deg;C</span>
+								<span class="bold sub black-text"> / 10&deg;C</span>
+							</div>
+						</div>
+						<div class="ww-elem padme1">
+							<div class="ww-top-text">
+								<span class="bold sub black-text weekday">토</span>
+								<span class="bold sub gray-text date"> / 5.15</span>
+							</div>
+							<div class="ww-icon">
+								<img class="ww-icon-small" src="img/light-rain.svg" alt="weather icon small" />
+							</div>
+							<div class="ww-bottom-text">
+								<span class="bold sub black-text">비 약간</span>
+								<br />
+								<span class="bold sub gray-text"> 24&deg;C</span>
+								<span class="bold sub black-text"> / 10&deg;C</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="weather-national weather-card">
+					<div class="desc-text gray-text">전국 날씨</div>
+					<div class="national-weather" id="national-weather">
+						<!-- Hint: use "nth child" selector! -->
+						<div class="national-list-elem">
+							<div class="nl-name bold black-text">
+								백령도
+							</div>
+							<div class="nl-icon">
+								<img class="nl-icon-small" src="img/cloudy.svg" alt="national weather" />
+							</div>
+							<div class="nl-temp">25&deg;</div>
+						</div>
+						<div class="national-list-elem">
+							<div class="nl-name bold black-text">
+								서울
+							</div>
+							<div class="nl-icon">
+								<img class="nl-icon-small" src="img/cloudy.svg" alt="national weather" />
+							</div>
+							<div class="nl-temp">25&deg;</div>
+						</div>
+						<div class="national-list-elem">
+							<div class="nl-name bold black-text">
+								춘천
+							</div>
+							<div class="nl-icon">
+								<img class="nl-icon-small" src="img/cloudy.svg" alt="national weather" />
+							</div>
+							<div class="nl-temp">25&deg;</div>
+						</div>
+						<div class="national-list-elem">
+							<div class="nl-name bold black-text">
+								대전
+							</div>
+							<div class="nl-icon">
+								<img class="nl-icon-small" src="img/cloudy.svg" alt="national weather" />
+							</div>
+							<div class="nl-temp">25&deg;</div>
+						</div>
+						<div class="national-list-elem">
+							<div class="nl-name bold black-text">
+								청주
+							</div>
+							<div class="nl-icon">
+								<img class="nl-icon-small" src="img/cloudy.svg" alt="national weather" />
+							</div>
+							<div class="nl-temp">25&deg;</div>
+						</div>
+						<div class="national-list-elem">
+							<div class="nl-name bold black-text">
+								강릉
+							</div>
+							<div class="nl-icon">
+								<img class="nl-icon-small" src="img/cloudy.svg" alt="national weather" />
+							</div>
+							<div class="nl-temp">25&deg;</div>
+						</div>
+						<div class="national-list-elem">
+							<div class="nl-name bold black-text">
+								전주
+							</div>
+							<div class="nl-icon">
+								<img class="nl-icon-small" src="img/cloudy.svg" alt="national weather" />
+							</div>
+							<div class="nl-temp">25&deg;</div>
+						</div>
+						<div class="national-list-elem">
+							<div class="nl-name bold black-text">
+								대구
+							</div>
+							<div class="nl-icon">
+								<img class="nl-icon-small" src="img/cloudy.svg" alt="national weather" />
+							</div>
+							<div class="nl-temp">25&deg;</div>
+						</div>
+						<div class="national-list-elem">
+							<div class="nl-name bold black-text">
+								울릉도
+							</div>
+							<div class="nl-icon">
+								<img class="nl-icon-small" src="img/cloudy.svg" alt="national weather" />
+							</div>
+							<div class="nl-temp">25&deg;</div>
+						</div>
+						<div class="national-list-elem">
+							<div class="nl-name bold black-text">
+								광주
+							</div>
+							<div class="nl-icon">
+								<img class="nl-icon-small" src="img/cloudy.svg" alt="national weather" />
+							</div>
+							<div class="nl-temp">25&deg;</div>
+						</div>
+						<div class="national-list-elem">
+							<div class="nl-name bold black-text">
+								제주
+							</div>
+							<div class="nl-icon">
+								<img class="nl-icon-small" src="img/cloudy.svg" alt="national weather" />
+							</div>
+							<div class="nl-temp">25&deg;</div>
+						</div>
+						<div class="national-list-elem">
+							<div class="nl-name bold black-text">
+								부산
+							</div>
+							<div class="nl-icon">
+								<img class="nl-icon-small" src="img/cloudy.svg" alt="national weather" />
+							</div>
+							<div class="nl-temp">25&deg;</div>
+						</div>
+					</div>
+				</div>
+				<div class="sunrise-sunset">
+					<div class="gray-text emp-125">내 위치의 일출 &bull; 일몰 시간</div>
+					<div class="flex-row space-between padded15">
+				<div class="binder weather flex-col flex-center">
+					<img class="sun-icons" src="img/sunrise.svg" alt="sunrise">
+						<div class="sunrise emp-125">
+							일출&nbsp;
+							<span id="sunrise">20:22</span>
+						</div>
+				</div>
+				<div class="binder weather flex-col flex-center">
+					<img class="sun-icons" src="img/sunset.svg" alt="sunset">
+						<div class="sunset emp-125">
+							일몰&nbsp;
+							<span id="sunset">10:17</span>
+						</div>
+					</div>
+					</div>
+				</div>
+				<div class="forecast-3hr">
+					<div class="forecast-3hr-title bold black-text emp-125">3시간 예보</div>
+					<div class="hr3-grid">
+						<div class="hr3-grid-elem grid-top">
+							<span class="hr3-date">5월 17일</span>
+						</div>
+						<div class="hr3-grid-elem grid-top">
+							<span class="hr3-date">5월 17일</span>
+						</div>
+						<div class="hr3-grid-elem grid-top">
+							<span class="hr3-date">5월 17일</span>
+						</div>
+						<div class="hr3-grid-elem grid-top">
+							<span class="hr3-date">5월 18일</span>
+						</div>
+						<div class="hr3-grid-elem grid-top">
+							<span class="hr3-date">5월 18일</span>
+						</div>
+						<div class="hr3-grid-elem grid-top">
+							<span class="hr3-date">5월 18일</span>
+						</div>
+						<div class="hr3-grid-elem grid-top">
+							<span class="hr3-date">5월 18일</span>
+						</div>
+						
+						<div class="hr3-grid-elem grid-midtop">
+							<img class="hr3-icon-tiny" src="img/sunny.svg" alt="three hour forecast">
+							<div class="hr3-text bold gray-text">맑음</div>
+						</div>
+						<div class="hr3-grid-elem grid-midtop">
+							<img class="hr3-icon-tiny" src="img/sunny.svg" alt="three hour forecast">
+							<div class="hr3-text bold gray-text">맑음</div>
+						</div>
+						<div class="hr3-grid-elem grid-midtop">
+							<img class="hr3-icon-tiny" src="img/sunny.svg" alt="three hour forecast">
+							<div class="hr3-text bold gray-text">맑음</div>
+						</div>
+						<div class="hr3-grid-elem grid-midtop">
+							<img class="hr3-icon-tiny" src="img/sunny.svg" alt="three hour forecast">
+							<div class="hr3-text bold gray-text">맑음</div>
+						</div>
+						<div class="hr3-grid-elem grid-midtop">
+							<img class="hr3-icon-tiny" src="img/sunny.svg" alt="three hour forecast">
+							<div class="hr3-text bold gray-text">맑음</div>
+						</div>
+						<div class="hr3-grid-elem grid-midtop">
+							<img class="hr3-icon-tiny" src="img/sunny.svg" alt="three hour forecast">
+							<div class="hr3-text bold gray-text">맑음</div>
+						</div>
+						<div class="hr3-grid-elem grid-midtop">
+							<img class="hr3-icon-tiny" src="img/sunny.svg" alt="three hour forecast">
+							<div class="hr3-text bold gray-text">맑음</div>
+						</div>
+						
+						<div class="hr3-grid-elem grid-mid">
+							<div class="temp-title bold gray-text">기온</div>
+							<span class="bold gray-text hr3-temp">25&deg;</span>
+						</div>
+						<div class="hr3-grid-elem grid-mid">
+							<div class="temp-title bold gray-text">기온</div>
+							<span class="bold gray-text hr3-temp">25&deg;</span>
+						</div>
+						<div class="hr3-grid-elem grid-mid">
+							<div class="temp-title bold gray-text">기온</div>
+							<span class="bold gray-text hr3-temp">25&deg;</span>
+						</div>
+						<div class="hr3-grid-elem grid-mid">
+							<div class="temp-title bold gray-text">기온</div>
+							<span class="bold gray-text hr3-temp">25&deg;</span>
+						</div>
+						<div class="hr3-grid-elem grid-mid">
+							<div class="temp-title bold gray-text">기온</div>
+							<span class="bold gray-text hr3-temp">25&deg;</span>
+						</div>
+						<div class="hr3-grid-elem grid-mid">
+							<div class="temp-title bold gray-text">기온</div>
+							<span class="bold gray-text hr3-temp">25&deg;</span>
+						</div>
+						<div class="hr3-grid-elem grid-mid">
+							<div class="temp-title bold gray-text">기온</div>
+							<span class="bold gray-text hr3-temp">25&deg;</span>
+						</div>
+						
+						<div class="hr3-grid-elem grid-midbtm">
+							<div class="bold gray-text">강수확률</div>
+							<div class="bold gray-text hr3-rain">25%</div>
+						</div>
+						<div class="hr3-grid-elem grid-midbtm">
+							<div class="bold gray-text">강수확률</div>
+							<div class="bold gray-text hr3-rain">25%</div>
+						</div>
+						<div class="hr3-grid-elem grid-midbtm">
+							<div class="bold gray-text">강수확률</div>
+							<div class="bold gray-text hr3-rain">25%</div>
+						</div>
+						<div class="hr3-grid-elem grid-midbtm">
+							<div class="bold gray-text">강수확률</div>
+							<div class="bold gray-text hr3-rain">25%</div>
+						</div>
+						<div class="hr3-grid-elem grid-midbtm">
+							<div class="bold gray-text">강수확률</div>
+							<div class="bold gray-text hr3-rain">25%</div>
+						</div>
+						<div class="hr3-grid-elem grid-midbtm">
+							<div class="bold gray-text">강수확률</div>
+							<div class="bold gray-text hr3-rain">25%</div>
+						</div>
+						<div class="hr3-grid-elem grid-midbtm">
+							<div class="bold gray-text">강수확률</div>
+							<div class="bold gray-text hr3-rain">25%</div>
+						</div>
+						
+						<div class="hr3-grid-elem grid-btm">
+							<div class="bold gray-text hr3-wind-dir">북서서</div>
+							<div class="bold gray-text hr3-wind-spd">99m/s</div>
+						</div>
+						<div class="hr3-grid-elem grid-btm">
+							<div class="bold gray-text hr3-wind-dir">북서서</div>
+							<div class="bold gray-text hr3-wind-spd">99m/s</div>
+						</div>
+						<div class="hr3-grid-elem grid-btm">
+							<div class="bold gray-text hr3-wind-dir">북서서</div>
+							<div class="bold gray-text hr3-wind-spd">99m/s</div>
+						</div>
+						<div class="hr3-grid-elem grid-btm">
+							<div class="bold gray-text hr3-wind-dir">북서서</div>
+							<div class="bold gray-text hr3-wind-spd">99m/s</div>
+						</div>
+						<div class="hr3-grid-elem grid-btm">
+							<div class="bold gray-text hr3-wind-dir">북서서</div>
+							<div class="bold gray-text hr3-wind-spd">99m/s</div>
+						</div>
+						<div class="hr3-grid-elem grid-btm">
+							<div class="bold gray-text hr3-wind-dir">북서서</div>
+							<div class="bold gray-text hr3-wind-spd">99m/s</div>
+						</div>
+						<div class="hr3-grid-elem grid-btm">
+							<div class="bold gray-text hr3-wind-dir">북서서</div>
+							<div class="bold gray-text hr3-wind-spd">99m/s</div>
+						</div>
+					</div>
+				</div>
+				<div class="news-card">
+					<div class="binder news">
+						<span class="bold black-text emp-125">날씨 소식</span>
+						<span class="bold gray-text">더보기 &rarr;</span>
+					</div>
+					<div class="binder news">
+						<div class="news-line">&bull; 오늘 올 들어 가장 높은 기온...내일도 오늘만큼...</div>
+						<div class="news-line">&bull; 내일도 여름 더위...강원 동해안 열대야 주의</div>
+						<div class="news-line">&bull; 순천 황전 33.7도...30도 웃도는 때 이른 더위</div>
+						<div class="news-line">&bull; 전북 올해 들어 한낮 최고 기온...&quot;정읍 32.2도&quot;</div>
+						<div class="news-line">&bull; [그래픽] 5월 17일 전국 최고기온</div>
+						<div class="news-line">&bull; 밤이 돼도 무더위는 계속</div>
+						<div class="news-line">&bull; 부산 내일도 초여름 날씨...초미세먼지&bull;오존 나쁨</div>
+						<div class="news-line">&bull; 푹푹 찌는 강릉의 밤</div>
+						<div class="news-line">&bull; 이른 여름 날씨에 열대야도...폭염특보 체감온...</div>
+						<div class="news-line">&bull; [날씨] 내일(17일) 낮 30도↑ 무더위…모레부터 흐려져</div>
+					</div>
+				</div>
+				<div class="placeholder">
+				
+				</div>
+				<div class="news-card">
+					<div class="binder news">
+						<span class="bold black-text emp-125">뉴스</span>
+						<span class="bold gray-text">더보기 &rarr;</span>
+					</div>
+					<div class="binder news">
+						<div class="news-line">&bull; 북항재개발지 신설 도로명은 &quot;이순신대로&quot;</div>
+						<div class="news-line">&bull; 마지막 기수의 제대 신고...의무경찰 역사 속으로</div>
+						<div class="news-line">&bull; 슬레이트 마을 두 집 중 한 집 폐병 &quot;동네 ...</div>
+						<div class="news-line">&bull; 더위의 &quot;속도위반&quot;...17일도 경남 내륙 최고 33도</div>
+						<div class="news-line">&bull; 북항재개발지 신설 도로명은 &quot;이순신대로&quot;</div>
+						<div class="news-line">&bull; 1300t 사출기&bull;다관절 로봇...부산국제기계대전...</div>
+						<div class="news-line">&bull; &quot;불황 영향&quot; 올웨이즈 떠리몰 등 절약형 앱 인기</div>
+						<div class="news-line">&bull; 양산시, 경남 최초 선제적 자체 전기차 충전소 ...</div>
+						<div class="news-line">&bull; 부산,울산 원전도시 전기료 인하 수혜</div>
+						<div class="news-line">&bull; 챗GPT가 만든 하이볼, 세계 최초 국내 판매</div>
+					</div>
+				</div>
+			</div>
+		</div>
    <script src="/js/wtranslate.js"></script>
 	<script src="/js/geolocation.js"></script>
 	<script src="/js/weather.js"></script>
