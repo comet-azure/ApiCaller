@@ -1,4 +1,5 @@
-const APIkey = "my key";
+// Not to be exposed to public!
+const key = "my key";
 
 //http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=[key]&dataType=JSON&base_date=[today - 20230512]&base_time=[time - 1500]&nx=[x]&ny=[y]
 const apiURLWeatherNow = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?ServiceKey="
@@ -13,10 +14,15 @@ const catLUTForecast = [["T1H","기온"],["RN1","1시간강수량"],["SKY","하�
 // For rainfall, 0, "-" or null denotes "No rainfall"
 // All time should be rounded to either top of the hour (current weather) or thirty minutes past previous hour (forecast)
 
-function kwGetWeather(lat, lon){
+function kwGetWeather(lat, lon, isXY){
 	// http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=[key]&dataType=JSON&base_date=[today - 20230512]&base_time=[time - 1500]&nx=[x]&ny=[y]
-	var conv = fnLatLon2XY(lat, lon);
-	var res = conv.split(" ");
+	if (isXY != true){ // If it's NOT an XY format
+		var conv = fnLatLon2XY(lat, lon); // Convert the lat and lon value to X and Y
+		var res = conv.split(" "); // Split the result into array of X and Y value
+	}
+	else { // If it's an XY format
+		var res = [lat, lon]; // Treat lat and lon value as X and Y
+	}
 	var x = res[0];
 	var y = res[1];
 	var date = getMyDate();
@@ -37,10 +43,15 @@ function kwGetWeather(lat, lon){
 	})
 }
 
-function kwGetWeatherT(lat, lon){
+function kwGetWeatherT(lat, lon, isXY){
 	// http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=[key]&dataType=JSON&base_date=[today - 20230512]&base_time=[time - 1500]&nx=[x]&ny=[y]
-	var conv = fnLatLon2XY(lat, lon);
-	var res = conv.split(" ");
+	if (isXY != true){ // If it's NOT an XY format
+		var conv = fnLatLon2XY(lat, lon); // Convert the lat and lon value to X and Y
+		var res = conv.split(" "); // Split the result into array of X and Y value
+	}
+	else { // If it's an XY format
+		var res = [lat, lon]; // Treat lat and lon value as X and Y
+	}
 	var x = res[0];
 	var y = res[1];
 	var date = getMyDate();
@@ -61,10 +72,15 @@ function kwGetWeatherT(lat, lon){
 	})
 }
 
-function kwGetForecast(lat, lon){
+function kwGetForecast(lat, lon, isXY){
 	// http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=[key]&dataType=JSON&base_date=[today - 20230512]&base_time=[time - 1530]&nx=[x]&ny=[y]
-	var conv = fnLatLon2XY(lat, lon);
-	var res = conv.split(" ");
+	if (isXY != true){ // If it's NOT an XY format
+		var conv = fnLatLon2XY(lat, lon); // Convert the lat and lon value to X and Y
+		var res = conv.split(" "); // Split the result into array of X and Y value
+	}
+	else { // If it's an XY format
+		var res = [lat, lon]; // Treat lat and lon value as X and Y
+	}
 	var x = res[0];
 	var y = res[1];
 	var date = getMyDate();
@@ -76,10 +92,15 @@ function kwGetForecast(lat, lon){
 		console.log(data);
 	})
 }
-function kwGetForecastT(lat, lon){
+function kwGetForecastT(lat, lon, isXY){
 	// http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=[key]&dataType=JSON&base_date=[today - 20230512]&base_time=[time - 1530]&nx=[x]&ny=[y]
-	var conv = fnLatLon2XY(lat, lon);
-	var res = conv.split(" ");
+	if (isXY != true){ // If it's NOT an XY format
+		var conv = fnLatLon2XY(lat, lon); // Convert the lat and lon value to X and Y
+		var res = conv.split(" "); // Split the result into array of X and Y value
+	}
+	else { // If it's an XY format
+		var res = [lat, lon]; // Treat lat and lon value as X and Y
+	}
 	var x = res[0];
 	var y = res[1];
 	var date = getMyDate();
