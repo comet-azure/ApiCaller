@@ -1,4 +1,3 @@
-const API_KEY = "Your API Key"; // API 키
 const COORDS = 'coords'; // 좌표를 받을 변수
 var latitude = 0.0; // 위도
 var longitude = 0.0; // 경도
@@ -27,6 +26,25 @@ function geoWeather(position){
 			const feelslike = data.main.feels_like; // 체감온도
 			const maxtemp = data.main.temp_max; // 최고기온
 			const mintemp = data.main.temp_min; // 최저기온
+			var rainfall_oneHr = 0.0;
+			var rainfall_threeHr = 0.0;
+				if ("rain" in data){
+					if ("1h" in data.rain) {
+						rainfall_oneHr = data.rain["1h"];
+					}
+					else {
+						rainfall_oneHr = 0.0;
+					}
+					if ("3h" in data.rain) {
+						rainfall_threeHr = data.rain["1h"];
+					}
+					else {
+						rainfall_threeHr = 0.0;
+					}
+				}
+				
+				console.log(rainfall_oneHr);
+				console.info(rainfall_threeHr);
 
 	        console.log( "날씨: " + weather, "온도: " + temp, "습도: " + humid, "풍속: " + windspeed, "풍향: " + winddir, "일출: " + srStr, "일몰: " + ssStr, "체감온도: " + feelslike, "최고기온: " + maxtemp, "최저기온: " + mintemp);
 	        $("#weather-desc").text(wtranslate(weather)); // 영어 -> 한국어 변환한 현재 날씨

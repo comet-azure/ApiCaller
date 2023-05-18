@@ -1,11 +1,17 @@
 // Not to be exposed to public!
-const key = "my key";
+var key = "-";
 
 //http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=[key]&dataType=JSON&base_date=[today - 20230512]&base_time=[time - 1500]&nx=[x]&ny=[y]
 const apiURLWeatherNow = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?ServiceKey="
 
 //백령도, 서울, 춘천, 강릉, 정주, 대전, 대구, 부산, 울릉도, 전주, 광주, 제주
 const targetLocations = [[21,135],[60,127],[73,134],[92,131],[69,106],[67,100],[89,90],[98,76],[127,127],[63,89],[65,123]];
+
+function getPrefabIndex(index) {
+	var result = targetLocations[index];
+	return result;
+}
+
 
 // Value translation data, this is more or less for reference
 const catLUTNow = [["T1H","기온"],["RN1","1시간강수량"],["UUU","동서바람벡터"],["VVV","남북바람벡터"],["REH","습도"],["PTY","강수형태"],["VEC","풍향"],["WSD","풍속"]];
@@ -32,14 +38,8 @@ function kwGetWeather(lat, lon, isXY){
 	fetch(request).then(response => response.json())
 		.then(data => {
 		console.log(data);
-		var a = data.response.body;
-		var s = data.response.body.items[0];
-		var d = data.response.body.items[0].item;
-		var f = data.response.body.items[0].item.category;
-		console.log(a);
-		console.log(s);
-		console.log(d);
-		console.log(f);
+		var x = makeResponse(data, null);
+		console.info(x);
 	})
 }
 
@@ -60,15 +60,8 @@ function kwGetWeatherT(lat, lon, isXY){
 	console.log(request);
 	fetch(request).then(response => response.json())
 		.then(data => {
-		console.log(data);
-		var a = data.response.body;
-		console.log(a);
-		var s = data.response.body.items;
-		console.log(s);
-		var d = data.response.body.items.item[0];
-		console.log(d);
-		var f = data.response.body.items.item[0].category;
-		console.log(f);
+		var x = makeResponse(data, null);
+		console.info(x);
 	})
 }
 
@@ -111,6 +104,47 @@ function kwGetForecastT(lat, lon, isXY){
 		.then(data => {
 		console.log(data);
 	})
+}
+
+function makeResponse(ret, callback) {
+     
+    var pty, reh, rn1, t1h, uuu, vec, vvv, wsd;
+    ret.response.body.items.item.forEach(function(it) {
+        if (it.category == "PTY")
+            pty = it.obsrValue;
+        else if (it.category == "REH")
+            reh = it.obsrValue;
+        else if (it.category == "RN1")
+            rn1 = it.obsrValue;
+        else if (it.category == "T1H")
+            t1h = it.obsrValue;
+        else if (it.category == "UUU")
+            uuu = it.obsrValue;
+        else if (it.category == "VEC")
+            vec = it.obsrValue;
+        else if (it.category == "VVV")
+            vvv = it.obsrValue;
+        else if (it.category == "WSD")
+            wsd = it.obsrValue;            
+    });
+	
+    if (pty == 0) {
+        pty = "sun";
+    }
+    else if (pty == 1) {
+        pty = "rain";
+    }
+    else if (pty == 2) {
+        pty = "rain/snow";
+    }
+    else if (pty == 3) {
+        pty = "snow";
+    }
+    else if (pty == 4) {
+        pty = "rain";
+    }
+     
+    return ({temp : t1h, wind : wsd, reh: reh, pty: pty, rn1: rn1, uuu: uuu, vec: vec, vvv: vvv, wsd: wsd});    
 }
 
 function roundTimeThirty(){
