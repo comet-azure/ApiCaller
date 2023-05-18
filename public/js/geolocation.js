@@ -51,12 +51,11 @@ function showErrorMsg(error) {
 function onGeoOk(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
-    const api_key = "Your API Key";
     const url = 'https://dapi.kakao.com/v2/local/geo/coord2address.json?x=' + lon + '&y=' + lat;
     fetch(url, {
             method: "post",
             headers: new Headers({
-                "Authorization": "KakaoAK " + api_key
+                "Authorization": "KakaoAK " + kakaoapikey
             })
         }).then(response => response.json())
         .then(data => {
