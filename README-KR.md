@@ -24,7 +24,8 @@
   
 # 3. 기술 스택
 - 언어: JavaScript, HTML5, CSS3
-- 프레임워크: Express(Node.js)
+- 서버: Node.js
+- 프레임워크: Express.js
 - 사용 배경: 스프링으로 페이지를 제작하려고 했으나 Geolocation API를 고려하면 Node.js로 웹 서버를 만들어 연결하는 편이 더 간단했기 때문에 Node.js를 사용하기로 했다.
 
 # 4. 결과물
