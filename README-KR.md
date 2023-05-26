@@ -29,7 +29,10 @@
 - 사용 배경: 스프링으로 페이지를 제작하려고 했으나 Geolocation API를 고려하면 Node.js로 웹 서버를 만들어 연결하는 편이 더 간단했기 때문에 Node.js를 사용하기로 했다.
 
 # 4. 결과물
-- (날씨 페이지 사진 첨부 및 샘플 코드 정리)
+- 날씨 페이지 화면:
+  ![Image 001](https://github.com/comet-azure/ApiCaller/assets/50683606/a407a306-8e39-4aef-8516-74d72c88c9f8)
+- 지도 페이지 화면:
+  ![Image 003](https://github.com/comet-azure/ApiCaller/assets/50683606/a8646ca6-93a0-4f2b-919f-5900c30477db)
 
 # 5. 느낀 점
 - 처음 Node.js를 사용해 웹 서버를 만들고 ngrok로 연결해 로컬호스트 작업물을 https 도메인 주소로 공유하는 과정에서 이런 방식으로도 작업물 공유가 가능하다는 것을 배웠습니다.
