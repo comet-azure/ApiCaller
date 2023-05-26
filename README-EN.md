@@ -5,7 +5,7 @@
 - Languages: JavaScript, HTML5, CSS3
 - Server: Node.js
 - Framework: Express.js
-- Reasons for this stack: I was going to make this with Spring framework, but it was easier to use Node.js to connect my localhost server to ngrok than Spring.
+- Reason for this stack: I was going to make this with Spring framework, but it was easier to use Node.js to connect my localhost server to ngrok than Spring.
 - APIs: Geolocation API(https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API), OpenWeatherMap API(https://openweathermap.org/current), Kakao REST API - Local(https://developers.kakao.com/docs/latest/ko/local/dev-guide), Kakao Map API(https://apis.map.kakao.com/web/sample/)
 
 # 3. Result
