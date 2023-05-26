@@ -1,5 +1,5 @@
 # 1. Introduction
-This project is a part of a team project, "Spring". The main objective was to make a Spring and Spring Boot based web portal with various functions, such as Shopping, Games, Movies, Weather, Map, etc. I was given a role to make a weather page and a map page of the web portal.
+This project is a part of a team project, "Spring". The main objective was to make a Spring and Spring Boot based web portal with various functions, such as Shopping, Games, Movies, Weather, Map, etc. I was given a role to make a weather page and a map page of the web portal. Started on April 28th, 2023, ended on May 19th, 2023.
 
 # 2. Functions
 ### Weather Page
