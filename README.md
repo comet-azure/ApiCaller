@@ -95,5 +95,6 @@ If you want to know more about ApiCaller, click here: <a href="README-EN.md">Eng
 - Node.js도 컨트롤러가 필요하고 사용 전 환경 설정이 필요하다는 점에서 스프링과 비슷하지만, 패키지 설치 후 package.json에서 start 부분에 메인이 되는 파일 이름을 넣고 Express 프레임워크를 사용해 훨씬 짧은 코드로 Tomcat 없이 자체적으로 웹 서버를 만들어 연결이 가능하다는 점에서 굉장히 유용함을 느꼈습니다.
 - 기상청 API로 검색했을 때 현재 위치에 따른 모든 날씨 정보를 한 번에 보여주는 "날씨 어때?" 라는 웹 앱을 발견했습니다. 어떻게 만든 것인지 궁금해서 개발자 도구로 봤었는데 Redux로 만든 거라 코드를 읽을 수가 없었습니다. API에 대한 공부를 더 해서 나중에는 그 분처럼 모든 날씨 정보를 볼 수 있도록 이 프로젝트의 버전 2.0을 내놓고 싶습니다.
 
-# 7. 다른 프로젝트도 보기
-- (스프링 )
+# 7. 다른 프로젝트
+- 1차 팀 프로젝트: https://github.com/comet-azure/ar
+- 스프링 게시판(PagingPractice): https://github.com/comet-azure/PagingPractice
