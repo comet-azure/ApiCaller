@@ -4,6 +4,7 @@ If you want to know more about ApiCaller, click here: <a href="README-EN.md">Eng
 - 팀 프로젝트명: Spring
 - 개발 배경: 2차 팀 프로젝트
 - 개발 계기: 팀원들과 스프링과 스프링부트를 기반으로 한 네이버와 비슷한 다양한 기능을 가진 포털 사이트를 구현하고 싶었다.
+- 제작 기간: 2023년 4월 28일 ~ 2023년 5월 19일
 
 # 2. 주요 기능
 ### 날씨 페이지(ApiCaller)
