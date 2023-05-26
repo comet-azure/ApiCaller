@@ -29,6 +29,7 @@
 - 서버: Node.js
 - 프레임워크: Express.js
 - 사용 배경: 스프링으로 페이지를 제작하려고 했으나 Geolocation API를 고려하면 Node.js로 웹 서버를 만들어 연결하는 편이 더 간단했기 때문에 Node.js를 사용하기로 했다.
+- API: Geolocation API(https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API), OpenWeatherMap API(https://openweathermap.org/current), Kakao REST API - Local(https://developers.kakao.com/docs/latest/ko/local/dev-guide), Kakao Map API(https://apis.map.kakao.com/web/sample/)
 
 # 4. 결과물
 - 날씨 페이지 화면:
