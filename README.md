@@ -7,12 +7,12 @@ If you want to know more about ApiCaller, click here: <a href="README-EN.md">Eng
 - 제작 기간: 2023년 4월 28일 ~ 2023년 5월 19일
 
 # 2. 주요 기능
-### 날씨 페이지(ApiCaller)
+### 날씨 페이지(담당 부분)
 - 사용자 위치(위경도 -> 동, 구 주소)와 그 위치의 현재 날씨를 아이콘으로 보여준다.
 - 현재 기온, 풍속, 풍향을 알려준다.
 - 주요 지역의 현재 날씨와 기온을 알려준다.
 
-### 지도 페이지(ApiCaller)
+### 지도 페이지(담당 부분)
 - 현재 위치를 마커로 표시, 지도로 보여준다.
 - 사용자 컨트롤로 지도, 스카이뷰 전환이 가능하다.
 - 사용자 컨트롤로 확대, 축소가 가능하다.
@@ -42,17 +42,19 @@ If you want to know more about ApiCaller, click here: <a href="README-EN.md">Eng
 - 포커 홀덤, 테트리스, 캔디 크러시, 십자말풀이 게임을 할 수 있다.
 - 게임 아이템 구매, 유저 정보 수정이 가능하다.
 
-# 3. 기술 스택(ApiCaller)
-- 언어: JavaScript, HTML5, CSS3
+# 3. 기술 스택
+- 언어: Java, JavaScript, HTML5, CSS3
 - 서버: Node.js
-- 프레임워크: Express.js
-- 사용 배경: 스프링으로 페이지를 제작하려고 했으나 Geolocation API를 고려하면 Node.js로 웹 서버를 만들어 연결하는 편이 더 간단했기 때문에 Node.js를 사용하기로 했다.
+- 데이터베이스: Oracle 11g
+- 프레임워크: Spring Framework, Express.js
+- 작업 환경: Spring Tool Suite 3.9.12 RELEASE, Visual Studio Code
 - API: Geolocation API(https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API), OpenWeatherMap API(https://openweathermap.org/current), Kakao REST API - Local(https://developers.kakao.com/docs/latest/ko/local/dev-guide), Kakao Map API(https://apis.map.kakao.com/web/sample/)
+- Node.js 사용 배경: 스프링으로 페이지를 제작하려고 했으나 Geolocation API를 고려하면 Node.js로 웹 서버를 만들어 연결하는 편이 더 간단했기 때문에 Node.js를 사용하기로 했다.
 
 # 4. 결과물
-- 날씨 페이지 화면:
+- 날씨 페이지 화면(담당 부분):
   ![Image 001](https://github.com/comet-azure/ApiCaller/assets/50683606/a407a306-8e39-4aef-8516-74d72c88c9f8)
-- 지도 페이지 화면:
+- 지도 페이지 화면(담당 부분):
   ![Image 003](https://github.com/comet-azure/ApiCaller/assets/50683606/a8646ca6-93a0-4f2b-919f-5900c30477db)
 - 메인 페이지 화면:
   ![메인페이지](https://github.com/comet-azure/ApiCaller/assets/50683606/378262ab-bb48-47d7-8744-83b51faa28e2)
@@ -97,5 +99,5 @@ If you want to know more about ApiCaller, click here: <a href="README-EN.md">Eng
 - 기상청 API로 검색했을 때 현재 위치에 따른 모든 날씨 정보를 한 번에 보여주는 "날씨 어때?" 라는 웹 앱을 발견했습니다. 어떻게 만든 것인지 궁금해서 개발자 도구로 봤었는데 Redux로 만든 거라 코드를 읽을 수가 없었습니다. API에 대한 공부를 더 해서 나중에는 그 분처럼 모든 날씨 정보를 볼 수 있도록 이 프로젝트의 버전 2.0을 내놓고 싶습니다.
 
 # 7. 다른 프로젝트
-- 1차 팀 프로젝트: https://github.com/comet-azure/ar
+- 1차 팀 프로젝트(자바 스윙 기반 항공권 예약 프로그램): https://github.com/comet-azure/ar
 - 스프링 게시판(PagingPractice): https://github.com/comet-azure/PagingPractice
