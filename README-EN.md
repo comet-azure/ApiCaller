@@ -16,8 +16,13 @@ This project is a part of a team project, "Spring". The main objective was to ma
 
 # 4. Functions
 ### Weather Page
-- Shows your location(South Korea Only)
+- Shows your current location(South Korea Only)
 - Shows current weather of your location with an icon
 - Shows current temperature, wind speed, wind direction of your location
 - Shows current weather of major cities of Korea
 - Shows sunrise and sunset time of your location
+
+### Map Page
+- Shows your current location(South Korea Only)
+- Can change map view to satelite view
+- Can magnify and minimize the map
