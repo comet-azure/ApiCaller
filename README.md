@@ -52,6 +52,8 @@ If you want to know more about ApiCaller, click here: <a href="README-EN.md">Eng
 - Node.js 사용 배경: 스프링으로 페이지를 제작하려고 했으나 Geolocation API를 고려하면 Node.js로 웹 서버를 만들어 연결하는 편이 더 간단했기 때문에 Node.js를 사용하기로 했다.
 
 # 4. 결과물
+- Spring 프로젝트 링크: https://github.com/steha2/os
+  (날씨, 지도 페이지는 연결 안 됨 - 고정된 도메인 주소 없음)
 - 날씨 페이지 화면(담당 부분):
   ![Image 001](https://github.com/comet-azure/ApiCaller/assets/50683606/a407a306-8e39-4aef-8516-74d72c88c9f8)
 - 지도 페이지 화면(담당 부분):
@@ -72,7 +74,6 @@ If you want to know more about ApiCaller, click here: <a href="README-EN.md">Eng
 - 게임 페이지 화면:
   ![게임](https://github.com/comet-azure/ApiCaller/assets/50683606/3caacb47-6873-45b8-b8b3-17585447a05d)
   ![게임2](https://github.com/comet-azure/ApiCaller/assets/50683606/751f903d-f958-492a-a426-16095bec7675)
-
 
 # 5. 개발 과정 중 발생한 문제와 해결 과정
 - 문제(1): Geolocation API를 사용하면 현재 위치의 위경도를 가져올 수 있지만 주소로 나오지는 않았다.
