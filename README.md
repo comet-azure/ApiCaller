@@ -44,7 +44,7 @@ If you want to know more about ApiCaller, click here: <a href="README-EN.md">Eng
 
 # 3. 기술 스택
 - 언어: Java, JavaScript, HTML5, CSS3
-- 서버: Node.js
+- 서버: Apache Tomcat v9.0, Node.js
 - 데이터베이스: Oracle 11g
 - 프레임워크: Spring Framework, Express.js
 - 작업 환경: Spring Tool Suite 3.9.12 RELEASE, Visual Studio Code
